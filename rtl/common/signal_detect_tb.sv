@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-module edge_detect_tb #(
+module signal_detect_tb #(
     // parameters
     clock_period = 2
 ) (
@@ -36,11 +36,13 @@ initial begin
     $stop();
 end
 
-logic pos_edge, neg_edge;
-edge_detect edge_detect_inst (
+logic edge_positive, edge_negative, level_high, level_low;
+signal_detect signal_detect_inst (
     .signal ( signal ),
-    .pos_edge ( pos_edge ),
-    .neg_edge ( neg_edge ),
+    .edge_positive ( edge_positive ),
+    .edge_negative ( edge_negative ),
+    .level_high ( level_high ),
+    .level_low ( level_low ),
     .clock ( clock ),
     .reset ( reset )
 );
