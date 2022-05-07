@@ -5,18 +5,18 @@ module MLT_3_encode (
     input  logic clock, reset
 );
 
-logic NRZ_pos_edge, NRZ_neg_edge, NRZ_pos_level, NRZ_neg_level;
-edge_detect edge_detect_NRZ (
+logic NRZ_edge_positive, NRZ_edge_negative, NRZ_level_high, NRZ_level_low;
+signal_detect signal_detect_NRZ (
     .signal ( NRZ ),
-    .pos_edge ( NRZ_pos_edge ),
-    .neg_edge ( NRZ_neg_edge ),
-    .pos_level ( NRZ_pos_level ),
-    .neg_level ( NRZ_neg_level ),
+    .edge_positive ( NRZ_edge_positive ),
+    .edge_negative ( NRZ_edge_negative ),
+    .level_high ( NRZ_level_high ),
+    .level_low ( NRZ_level_low ),
     .clock ( clock ),
     .reset ( reset )
 );
 
-wire NRZ_pos = NRZ_pos_edge | NRZ_pos_level;
+wire NRZ_pos = NRZ_edge_positive | NRZ_level_high;
 
 enum logic [1:0] {
     state_1_0 = 2'h0,
